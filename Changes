@@ -1,4 +1,8 @@
 Revision history for Perl extension WWW-Scraper-ISBN-PickABook_Driver.
 
+0.02    01/07/2011
+        - upgraded to Test::CPAN::Meta::JSON for tests.
+        - fixed warnings for undefined values.
+
 0.01	18/11/2010
         - initial release

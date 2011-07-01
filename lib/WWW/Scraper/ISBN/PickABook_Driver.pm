@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use vars qw($VERSION @ISA);
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 #--------------------------------------------------------------------------
 
@@ -129,9 +129,12 @@ sub search {
         $data->{image} = REFERER . $data->{image};
         $data->{thumb} = $data->{image};
     }
-    $data->{author} =~ s/.*?\s+by\s+//;
-    $data->{publisher} =~ s/&#0?39;/'/g;
-    $data->{$_} =~ s/([\w']+)/\u\L$1/g   for(qw(title author publisher));
+    $data->{author} =~ s/.*?\s+by\s+//      if($data->{author});
+    $data->{publisher} =~ s/&#0?39;/'/g     if($data->{publisher});
+    for(qw(title author publisher)) {
+        next    unless($data->{$_});
+        $data->{$_} =~ s/([\w']+)/\u\L$1/g;
+    }
 
 #use Data::Dumper;
 #print STDERR "\n# " . Dumper($data);
@@ -283,7 +286,7 @@ be forthcoming, please feel free to (politely) remind me.
 
 =head1 COPYRIGHT & LICENSE
 
-  Copyright (C) 2010 Barbie for Miss Barbell Productions
+  Copyright (C) 2010,2011 Barbie for Miss Barbell Productions
 
   This module is free software; you can redistribute it and/or
   modify it under the Artistic Licence v2.
