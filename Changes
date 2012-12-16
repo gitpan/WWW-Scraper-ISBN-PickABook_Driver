@@ -1,8 +1,17 @@
 Revision history for Perl extension WWW-Scraper-ISBN-PickABook_Driver.
 
-0.02    01/07/2011
+0.03    2012-12-16
+        - fixed broken test.
+        - reworked Makefile.PL for clarity.
+        - License updated consistently to Artistic License v2.0.
+        - META tests no longer require specific versions.
+        - upgraded to Test::CPAN::Meta::JSON for tests.
+        - added minimum perl version (5.006).
+        - change file dates changed to meet W3CDTF standards.
+
+0.02    2011-07-01
         - upgraded to Test::CPAN::Meta::JSON for tests.
         - fixed warnings for undefined values.
 
-0.01	18/11/2010
+0.01	2010-11-18
         - initial release

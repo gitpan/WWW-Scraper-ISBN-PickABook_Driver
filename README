@@ -27,14 +27,14 @@ This module requires these other modules:
 
 For optional testing the module would like these other modules:
 
-  Test::Pod
-  Test::Pod::Coverage
   Test::CPAN::Meta
   Test::CPAN::Meta::JSON
+  Test::Pod
+  Test::Pod::Coverage
 
 COPYRIGHT AND LICENSE
 
-  Copyright (C) 2010,2011 Barbie for Miss Barbell Productions
+  Copyright (C) 2010-2012 Barbie for Miss Barbell Productions
 
   This module is free software; you can redistribute it and/or
   modify it under the Artistic Licence v2.
