@@ -1,6 +1,6 @@
 {
     "name": "WWW-Scraper-ISBN-PickABook_Driver",
-    "version": "0.03",
+    "version": "0.04",
     "abstract": "Search driver for the Pick-A-Book online book catalog",
     "author": ["Barbie <barbie@cpan.org>"],
 
@@ -22,13 +22,14 @@
         "runtime" : {
             "requires" : {
                 "perl": "5.006",
-                "WWW::Mechanize": "1.60",
-                "WWW::Scraper::ISBN": "0.25",
-                "WWW::Scraper::ISBN::Driver": "0.18"
+                "WWW::Scraper::ISBN": "1.00",
+                "WWW::Scraper::ISBN::Driver": "1.00",
+                "WWW::Mechanize": "1.60"
             }
         },
         "test" : {
             "requires": {
+                "Data::Dumper": "0",
                 "IO::File": "0",
                 "Test::More": "0.70"
             },
@@ -44,7 +45,7 @@
     "provides": {
         "WWW::Scraper::ISBN::PickABook_Driver": {
             "file": "lib/WWW/Scraper/ISBN/PickABook_Driver.pm",
-            "version": "0.03"
+            "version": "0.04"
         }
     },
     "no_index": {
@@ -52,7 +53,12 @@
     },
 
     "resources": {
-        "license": "http://dev.perl.org/licenses/",
-        "bugtracker": { "web": "http://rt.cpan.org/Public/Dist/Display.html?Name=WWW-Scraper-ISBN-PickABook_Driver" }
+        "license": "http://www.perlfoundation.org/artistic_license_2_0",
+        "bugtracker": { "web": "http://rt.cpan.org/Public/Dist/Display.html?Name=WWW-Scraper-ISBN-PickABook_Driver" },
+        "repository": {
+            "url": "git://github.com/barbie/www-scraper-isbn-pickabook_driver.git",
+            "web": "http://github.com/barbie/www-scraper-isbn-pickabook_driver",
+            "type": "git"
+        }
     }
 }
