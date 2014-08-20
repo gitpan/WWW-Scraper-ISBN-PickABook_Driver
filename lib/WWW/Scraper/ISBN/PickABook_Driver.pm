@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use vars qw($VERSION @ISA);
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 #--------------------------------------------------------------------------
 
@@ -109,7 +109,7 @@ sub search {
     my $html = $mech->content();
 
     return $self->handler("Failed to find that book on the Pick-A-Book website. [$isbn]")
-        if(!$html || $html =~ m!Your search for "[^"]+" has produced 0 results.!si);
+        if(!$html || $html =~ m!Your search for "<span id="lblresultline"><b>ISBN = \d+</b></span>"\s+has produced 0 results.!si);
 
     $html =~ s/&amp;/&/g;
 #print STDERR "\n# content2=[\n$html\n]\n";
@@ -123,7 +123,7 @@ sub search {
     ($data->{publisher})    = $html =~ m!<span id="lblpublishervalue"[^>]*>([^<]+)</span>!si;
     ($data->{pubdate})      = $html =~ m!<span id="lblpublishdatevalue"[^>]*>([^<]+)</span>!si;
     ($data->{pages})        = $html =~ m!<span id="lblpagesvalue"[^>]*>([^<]+)</span>!si;
-    ($data->{description})  = $html =~ m!<span id="lbldescriptionvalue"[^>]*>([^<]+)</span>!si;
+    ($data->{description})  = $html =~ m!<span id="lbldescriptionvalueL?"[^>]*>([^<]+)</span>!si;
     ($data->{isbn10})       = $html =~ m!<span id="lblISBNvalue"[^>]*>([^<]+)</span>!si;
     ($data->{image})        = $html =~ m!<input type="image" name="imgbook" id="imgbook" title="[^"]+" src="([^"]+)"[^>]*>!si;
 

@@ -2,7 +2,7 @@
 use strict;
 
 use Data::Dumper;
-use Test::More tests => 49;
+use Test::More tests => 50;
 use WWW::Scraper::ISBN;
 
 ###########################################################
@@ -37,26 +37,26 @@ my %tests = (
         [ 'is',     'publisher',    'Random House Children\'s Books'    ],
         [ 'is',     'pubdate',      '1 October, 2020'   ],
         [ 'is',     'binding',      'Paperback'         ],
-        [ 'is',     'image_link',   'http://www.pickabook.co.uk/CoverImages/nojacket.gif' ],
-        [ 'is',     'thumb_link',   'http://www.pickabook.co.uk/CoverImages/nojacket.gif' ],
-        [ 'like',   'description',  qr|Finding himself alone on a desert island| ],
+        [ 'is',     'image_link',   'http://www.pickabook.co.uk/CoverImages/nojacket.gif'   ],
+        [ 'is',     'thumb_link',   'http://www.pickabook.co.uk/CoverImages/nojacket.gif'   ],
+        [ 'like',   'description',  qr|Finding himself alone on a desert island|            ],
         [ 'is',     'book_link',    'http://www.pickabook.co.uk/9780552557801.aspx?ToSearch=TRUE' ]
     ],
-    '9780571239566' => [
-        [ 'is',     'isbn',         '9780571239566'     ],
-        [ 'is',     'isbn10',       '0571239560'        ],
-        [ 'is',     'isbn13',       '9780571239566'     ],
-        [ 'is',     'ean13',        '9780571239566'     ],
+    '9780571224814' => [
+        [ 'is',     'isbn',         '9780571224814'     ],
+        [ 'is',     'isbn10',       '0571224814'        ],
+        [ 'is',     'isbn13',       '9780571224814'     ],
+        [ 'is',     'ean13',        '9780571224814'     ],
         [ 'is',     'title',        'Touching From A Distance'  ],
-        [ 'is',     'author',       'Deborah Curtis'    ],
+        [ 'is',     'author',       'Ian Curtis, Deborah Curtis'    ],
         [ 'is',     'publisher',    'Faber And Faber'   ],
-        [ 'is',     'pubdate',      '4 October, 2007'   ],
+        [ 'is',     'pubdate',      '17 February, 2005' ],
         [ 'is',     'binding',      'Paperback'         ],
         [ 'is',     'pages',        240                 ],
-        [ 'is',     'image_link',   'http://www.pickabook.co.uk/CoverImages/2008_2_22_67\9780571239566.jpg' ],
-        [ 'is',     'thumb_link',   'http://www.pickabook.co.uk/CoverImages/2008_2_22_67\9780571239566.jpg' ],
+        [ 'is',     'image_link',   'http://www.pickabook.co.uk/CoverImages/0367\03679eb1.JPG'  ],
+        [ 'is',     'thumb_link',   'http://www.pickabook.co.uk/CoverImages/0367\03679eb1.JPG'  ],
         [ 'like',   'description',  qr|Ian Curtis left behind a legacy rich in artistic genius| ],
-        [ 'is',     'book_link',    'http://www.pickabook.co.uk/9780571239566.aspx?ToSearch=TRUE' ]
+        [ 'is',     'book_link',    'http://www.pickabook.co.uk/9780571224814.aspx?ToSearch=TRUE' ]
     ],
 );
 
@@ -79,9 +79,27 @@ SKIP: {
     eval { $record = $scraper->search($isbn); };
     if($@) {
         like($@,qr/Invalid ISBN specified/);
-    }
-    elsif($record->found) {
+    } elsif($record->found) {
         ok(0,'Unexpectedly found a non-existent book');
+        my $error  = $record->error || '';
+        diag("error=[".Dumper($error)."]");
+        my $book = $record->book;
+        diag("book=[".Dumper($book)."]");
+    } else {
+		like($record->error,qr/Invalid ISBN specified|Failed to find that book|website appears to be unavailable/);
+    }
+
+    # this ISBN isn't available
+	$isbn = "9780571239566";
+    eval { $record = $scraper->search($isbn); };
+    if($@) {
+        like($@,qr/Invalid ISBN specified/);
+    } elsif($record->found) {
+        ok(0,'Unexpectedly found a non-existent book');
+        my $error  = $record->error || '';
+        diag("error=[".Dumper($error)."]");
+        my $book = $record->book;
+        diag("book=[".Dumper($book)."]");
     } else {
 		like($record->error,qr/Invalid ISBN specified|Failed to find that book|website appears to be unavailable/);
     }
