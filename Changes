@@ -1,6 +1,11 @@
 Revision history for WWW-Scraper-ISBN-PickABook_Driver
 ======================================================
 
+0.06    2014-08-29
+        - fixed skip in tests.
+        - fixed license fields in META.json to be lists.
+        - removed redundant conversion tests.
+
 0.05    2014-08-20
         - description pattern updated.
         - no results pattern updated.
